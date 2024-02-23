@@ -1,0 +1,11 @@
+class Solution:
+    def firstUniqChar(self, s: str) -> int:
+        ind=-1
+        l=set(s)
+        for i in l:
+            if s.count(i)==1:
+                if ind==-1:
+                    ind=s.index(i)
+                else:
+                    ind=min(ind,s.index(i))
+        return ind
