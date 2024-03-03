@@ -1,0 +1,30 @@
+import java.util.*;
+class Solution {
+    
+    public int minPairSum(int[] nums) {
+        int[] countSort=new int[100001];
+        for(int n:nums){
+            countSort[n]+=1;
+        }
+        int index=0;
+        int[] sorted=new int[nums.length];
+        for(int i=0;i<countSort.length;i++){
+            while (countSort[i]>0){
+                sorted[index++]=i;
+                countSort[i]-=1;
+            }
+        }
+        int[] a=Arrays.copyOfRange(sorted,0,sorted.length/2);
+        int[] b=Arrays.copyOfRange(sorted,sorted.length/2,sorted.length);
+        int max=0;
+        for (int i = 0; i < a.length / 2; i++) {
+            int temp = a[i];
+            a[i] = a[a.length - i - 1];
+            a[a.length - i - 1] = temp;
+        }
+        for (int i=0;i<a.length;i++){
+            max=Math.max(max,a[i]+b[i]);
+        }
+        return max;
+    }
+}
